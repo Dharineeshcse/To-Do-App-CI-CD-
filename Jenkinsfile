@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers{
+        githubpush()
+    }
+
     environment {
         IMAGE_NAME = "todo-app"
         CONTAINER_NAME = "todo-container"
