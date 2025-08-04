@@ -13,16 +13,6 @@ pipeline {
             }
         }
 
-        stage('Clean old Docker containers') {
-            steps {
-                bat '''
-                docker stop %CONTAINER_NAME%
-                docker rm %CONTAINER_NAME%
-                docker rmi %IMAGE_NAME%
-                ''' // Will fail silently if container doesn’t exist
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t %IMAGE_NAME% .'
