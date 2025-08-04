@@ -12,6 +12,15 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Dharineeshcse/To-Do-App-CI-CD-.git'
             }
         }
+        stage('Clean old Docker containers') {
+            steps {
+                bat '''
+                docker stop %CONTAINER_NAME%
+                docker rm %CONTAINER_NAME%
+                docker rmi %IMAGE_NAME%
+                '''
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
